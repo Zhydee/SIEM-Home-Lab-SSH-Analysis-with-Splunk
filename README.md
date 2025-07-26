@@ -398,17 +398,16 @@ This section showcases my ability to create and export reports directly from Spl
 
 ## 🧠 Conclusion
 
-This project demonstrated key Splunk skills:
+This project demonstrated key Splunk capabilities:
 - Field extraction and search optimization  
-- Anomaly detection using time-based visualization  
-- Attack surface profiling from source IPs  
-- Behavioral pattern detection from session IDs  
-- Dashboard and report creation in Splunk  
+- Anomaly detection using time-based visualizations  
+- Attack surface profiling based on source IPs  
+- Behavioral pattern analysis using session metadata  
+- Creation of interactive dashboards and exportable reports  
 
-This home lab gave me hands-on experience using Splunk to analyze SSH log data. I learned how to:
+Although the dataset was simulated and time-constrained, the methods and skills applied reflect real-world SIEM use cases and blue-team analysis workflows.
 
-- Spot useful patterns in logs like request methods, status codes, and IP behavior  
-- Get a better idea of what attacker activity might look like in log data  
-- Use Splunk to extract info, run searches, and build dashboards and reports
-
-Even though the dataset was from a simulated environment, the skills I practiced are useful for real-world monitoring and threat detection using SIEM tools like Splunk.
+💡 **Key takeaways from this home lab**:
+- Gained experience in identifying critical patterns in SSH logs  
+- Learned what to analyze to understand potential attacker behavior  
+- Practiced extracting valuable insights from SSH logs using Splunk’s search language and visualization tools
