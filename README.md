@@ -405,10 +405,10 @@ This project demonstrated key Splunk skills:
 - Behavioral pattern detection from session IDs  
 - Dashboard and report creation in Splunk  
 
-Although the dataset was simulated and constrained in time range, the analysis techniques are valid for real-world monitoring and SIEM deployments.
+This home lab gave me hands-on experience using Splunk to analyze SSH log data. I learned how to:
 
-💡 **From this home lab, I was able to:**
-- Understand what to analyze from an SSH log  
-- Learn what patterns or data points indicate attacker behavior  
-- Practice extracting meaningful information from SSH logs using Splunk’s search and visualization features
+- Spot useful patterns in logs like request methods, status codes, and IP behavior  
+- Get a better idea of what attacker activity might look like in log data  
+- Use Splunk to extract info, run searches, and build dashboards and reports
 
+Even though the dataset was from a simulated environment, the skills I practiced are useful for real-world monitoring and threat detection using SIEM tools like Splunk.
