@@ -183,7 +183,7 @@ The goal is to detect unusual behavior in SSH activity by focusing on the follow
 
 <p align="center"><b>Figure 5:</b> Timechart output showing the count of SSH log events over a one-hour span.</p>
 
-## 📊 Result of HTTP Status Codes
+## 📊 Result of timechart
 
 | Time | Count |
 |-------------|--------|
@@ -297,3 +297,105 @@ Overall, source IP analysis helps distinguish between random noise, automated re
 
 ## 📊 4. Monitor User Behavior
 ## 1. Failed Attempts by Session ID (uid)
+
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471074714-41b589f9-848a-4f23-af02-098c4baf0da1.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MzA5NjksIm5iZiI6MTc1MzUzMDY2OSwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNzQ3MTQtNDFiNTg5ZjktODQ4YS00ZjIzLWFmMDItMDk4YzRiYWYwZGExLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDExNTEwOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBiM2I4YWJmNGI1MThjYTEyYmExNjhlOTZlNjViNDJkZjMxNTI5Y2UwYzhlYTlmMDM4OTJkYmY5M2RlOTEzOGImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.9sHRQqeUWGi_f9mUEe62_fJGBcZrd4FlNcln-dLz8as)
+
+<p align="center"><b>Figure 11:</b> Result of identifying failed login attempts by session</p>
+
+## 📊 Result of HTTP Status Codes
+
+| Seesion uid | failed_attempts |
+|-------------|--------|
+| HT1002482   | 1      |
+| HT1010816   | 1      |
+| HT1021105   | 1      |
+....
+Based on the data, I noticed that each failed login attempt was linked to a different session ID (`uid`), meaning every session only had one failure.
+
+There were a total of **744 failed login events**, and all of them came from **744 unique sessions**. This pattern suggests the use of automated tools that rotate session IDs to avoid detection or rate-limiting, which is something attackers often do to stay under the radar.
+
+## ✅ What I Observed and Concluded
+
+To monitor user behavior, I analyzed **failed login attempts using the `uid` (session ID)** field, since the dataset didn’t contain any actual user account data.
+
+The results showed that all **744 failed login attempts** were each tied to a **unique session ID**, with no repetition. This strongly suggests the use of **automated attack scripts** that intentionally generate a **new session for every attempt** — a known tactic to evade **rate-limiting**, **brute-force protections**, and detection by tools that rely on repeated attempts from the same source.
+
+Even though this behavior doesn’t show repeated failures within a single session, it clearly points to a **distributed attack pattern**, which is much harder to detect unless advanced **cross-session correlation** or **source IP tracking** is in place.
+
+This type of pattern is critical for SOC teams to understand, as it demonstrates how attackers adapt to basic detection thresholds by rotating identifiers across their attempts.
+
+## 🎯 Purpose of Analyzing Failed Logins by `uid` (Session ID)
+
+Even though the dataset lacks a `user` field, analyzing failed login attempts based on the `uid` (session ID) still provides meaningful insights into attacker behavior at the session level.
+
+By focusing on `uid`, I was able to detect sessions with repeated failed login attempts, which is a strong indicator of brute-force activity or credential spraying tools. When a single session repeatedly fails to authenticate, it often points to automated tools attempting password guesses across multiple accounts.
+
+This method also gives SOC analysts session-level visibility. Even without knowing the actual username, tracking activity by session reveals how attackers move through the system, how persistent they are, and what methods they use.
+
+Additionally, analyzing by `uid` helps reduce noise in the logs by narrowing focus to particularly “loud” sessions — those that generate large volumes of failed attempts. This makes it easier to trigger alerts or apply thresholds, enabling faster response to likely threats.
+
+## 2. Analyze Session Duration
+
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471076849-3c35d28a-dfde-4989-8cf2-fcb81c5dc5ab.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MzIwNDEsIm5iZiI6MTc1MzUzMTc0MSwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNzY4NDktM2MzNWQyOGEtZGZkZS00OTg5LThjZjItZmNiODFjNWRjNWFiLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDEyMDkwMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTRkZDk1ZjcwMjc2NTRlZmIyZGM1YWFhY2MzMWJjODBiOGU1NjZiZmFiYjI0ZDlmYzU1NWMzMzM0YzA2OWQ4YjEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.5Ko69zDL1r0aOViafXoVYbBynSbvfPOe5kq1m-wfnPg)
+
+<p align="center"><b>Figure 11:</b> Result of identifying failed login attempts by session</p>
+
+## 📊 Result of HTTP Status Codes
+
+| Seesion uid | failed_duration |
+|-------------|--------|
+| HT1002482   | 0.00000      |
+| HT1010816   | 0.00000      |
+| HT1021105   | 0.00000      |
+....
+## 🧠 Why Session Durations Are 0
+
+While attempting to calculate session durations using the `ts` (timestamp) field and `uid` (session ID), I found that each session only had a single log entry or all entries shared the exact same timestamp. As a result, the calculation of `max(ts) - min(ts)` per session always resulted in zero.
+
+This is likely because the dataset is simulated — it comes from a public repository and seems to be designed primarily for basic detection or pattern analysis rather than modeling full session behavior. The absence of multiple time-staggered events per session means duration-based analysis isn’t meaningful in this case.
+
+## ✅ What I Observed and Concluded
+
+I attempted to analyze session durations by calculating the time difference between the first and last event (`ts`) for each session (`uid`). However, the results showed that every session had either a single timestamp or multiple events with identical timestamps. This caused all calculated durations to be `0`.
+
+This observation suggests that the dataset logs only one key event per session, rather than tracking full session lifecycles. It's likely a limitation of the simulated dataset — which appears to be designed for basic detection and pattern recognition rather than detailed session-based analysis. As such, session duration insights were not possible in this scenario.
+
+## 🧾 5. Splunk Report
+
+This report demonstrates my ability to generate reports from Splunk searches, even with synthetic data.
+
+### 📝 Report Title: `SSH Activity Summary Report`
+- **Query used**: Method, status code, source IP, and failed login breakdown
+- **Export format**: `.pdf`
+- **Purpose**: Show capability to convert Splunk search results into shareable executive reports
+
+📌 _This report was not meant for deep analytics but as **evidence of skill** in generating and formatting Splunk reports._
+
+---
+
+## 🧩 6. Splunk Dashboard
+
+### 🎯 Dashboard Title: `SSH Log Behavior Overview`
+
+**Panels included**:
+- **Top 10 Source IPs**: Horizontal bar chart showing top IPs by activity
+- **HTTP Status Code Breakdown**: Pie chart showing 200, 404, 400, 500, etc.
+- **Request Method Distribution**: Pie chart showing GET, POST, PUT, DELETE
+
+🔍 **Description**:
+> This dashboard provides a visual overview of SSH log behavior, including the most active source IPs (potential attackers), the types of HTTP request methods observed, and the distribution of HTTP response status codes. It helps analysts quickly identify unusual patterns in SSH traffic.
+
+---
+
+## 🧠 Conclusion
+
+This project demonstrated key Splunk skills:
+- Field extraction and search optimization  
+- Anomaly detection using time-based visualization  
+- Attack surface profiling from source IPs  
+- Behavioral pattern detection from session IDs  
+- Dashboard and report creation in Splunk  
+
+Although the dataset was simulated and constrained in time range, the analysis techniques are valid for real-world monitoring and SIEM deployments.
+
+---
