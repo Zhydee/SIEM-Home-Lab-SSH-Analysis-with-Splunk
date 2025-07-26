@@ -83,11 +83,11 @@ By analyzing the `method` field, I aimed to:
 - Detect signs of automated tools or scripts performing tasks like scanning, data submission, or file uploads.
 - Identify suspicious or rare HTTP methods (e.g., `PUT`, `DELETE`) that are typically associated with attempts to modify or compromise a system.
 
-## 2. Identify top users or source IP addresses accessing the SSH server:
+## 2. Identify top users or source IP addresses accessing the SSH server
 
 ![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471044666-b8c3d92f-ab0c-43e9-b677-aa5a5ff7738b.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MDYyMTgsIm5iZiI6MTc1MzUwNTkxOCwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNDQ2NjYtYjhjM2Q5MmYtYWIwYy00M2U5LWI2NzctYWE1YTVmZjc3MzhiLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDA0NTgzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWMxNjIzNTQ2NzkzNGU1NTJiMTU5YTI0YWNjZjJlZTE4NmJjNTU2ZTk5NDYyYzMzNTBlMWQzYmNkNjM5YzY2MWUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.IcA18rPnrQHCVjpObHFSvSCtf8MfnaxmDldZOuuDo0A)
 
-<p align="center"><b>Figure 2:</b> Result of SSH The Top Source IPs</p>
+<p align="center"><b>Figure 3:</b> Result of SSH The Top Source IPs</p>
 
 ## 📊 Result of Top 10 Source IPs
 
@@ -131,7 +131,7 @@ In SSH log analysis — especially within a honeypot or lab setup — identifyin
 
 ![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471045398-151f7d5a-a221-4c79-bcc3-38618d134f18.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MDcwMjMsIm5iZiI6MTc1MzUwNjcyMywicGF0aCI6Ii82NzU4Nzk4NS80NzEwNDUzOTgtMTUxZjdkNWEtYTIyMS00Yzc5LWJjYzMtMzg2MThkMTM0ZjE4LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDA1MTIwM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTFlOGViMDQ5NTY4MWEzZjRmZDBlMTllNzlmMzM4ZDcyMWQ1YmY4MGQ3NTgyYmJjMDA1MDljZmUzY2UxZmE4YTUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Y5mPYsO34Wa1hvsnFl7_humzswbQSzUTdu8w2MxQivg)
 
-<p align="center"><b>Figure 2:</b> Result of HTTP Method Patterns</p>
+<p align="center"><b>Figure 4:</b> Result of HTTP Method Patterns</p>
 
 ## 📊 Result of HTTP Status Codes
 
@@ -144,7 +144,6 @@ In SSH log analysis — especially within a honeypot or lab setup — identifyin
 | 503         | 20     |
 
 ## ✅ What I Observed and Concluded
-
 
 I analyzed the distribution of HTTP status codes in the SSH log data to gain insight into attacker behavior and potential system responses. The vast majority (2,256) of the requests returned a `200 OK` status, which is expected in honeypot environments designed to simulate successful interactions.
 
@@ -180,4 +179,121 @@ The goal is to detect unusual behavior in SSH activity by focusing on the follow
 
 ## 1. Look for unusual patterns in SSH activity (e.g., sudden spikes in login attempts)
 
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471067109-dff7a77a-dbfb-48a9-a672-7e926a4abea7.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MjY1NDMsIm5iZiI6MTc1MzUyNjI0MywicGF0aCI6Ii82NzU4Nzk4NS80NzEwNjcxMDktZGZmN2E3N2EtZGJmYi00OGE5LWE2NzItN2U5MjZhNGFiZWE3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDEwMzcyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTJiNzlmOGEyZTVjNTBmMDcxMDNjMzJlYjg3NzVlNDQzYzJiYWMyNGJjMDc1NDJhNDVhNzQ1MzkyMGVlMjkzZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.RDBuI-e9iCilqdjvMQb6XlC3FpVTXrtJ2lB5fLLpd0Y)
 
+<p align="center"><b>Figure 5:</b> Timechart output showing the count of SSH log events over a one-hour span.</p>
+
+## 📊 Result of HTTP Status Codes
+
+| Time | Count |
+|-------------|--------|
+| 2025-04-25 18:00       | 3000   |
+
+## 📉 Observation
+All SSH events in this dataset occurred within a single hour, producing a single visible bar on the timechart. This suggests the dataset is time-compressed or simulated.
+
+
+## 🧪 Conclusion
+Even with a limited time range, this method demonstrates how time-based visualizations can help detect:
+
+- Abnormal spikes in SSH traffic
+
+- Potential brute-force patterns
+
+- Unusual login activity frequency
+
+## 2. Analyze failed login attempts
+
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471067675-976737f1-c302-4524-a0e2-a11475f8553c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MjcxMzIsIm5iZiI6MTc1MzUyNjgzMiwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNjc2NzUtOTc2NzM3ZjEtYzMwMi00NTI0LWEwZTItYTExNDc1Zjg1NTNjLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDEwNDcxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRlOWQ1Yjk4ZGZlODE1NjgyMjA0Y2E2YzIyNjQ0MWVmYzRjMmNjZTRhZTJhZjM2MjkxOWRiN2E4OWFjOWI3NjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.4NchKiW6x9Yt_OeHlXZOVrrQCe3HXrVtNOCroQu_-wE)
+
+<p align="center"><b>Figure 6:</b> Result of failed SSH login attempts</p>
+
+## 📊 Result of HTTP Status Codes
+
+| Time | failed_logins |
+|-------------|--------|
+| 2025-04-25 18:00       | 744   |
+
+## 📉 What I Observed
+
+All 744 failed login attempts were logged within a single hour window (`2025-04-25 18:00`).  
+This was visualized as a single bar on the Splunk timechart.
+
+## 🧠 Why This Still Matters
+
+Even though the dataset is time-compressed and doesn't span multiple hours or days, this approach still demonstrates:
+
+- The value of time-based visualizations  
+- How sudden spikes can reveal security threats  
+- That real-world SSH logs would benefit from this technique
+
+If this were production data, seeing hundreds of failed logins in a short time window would be a strong indicator of a brute-force attack or bot activity.
+
+## 🧪 Conclusion
+
+Using the condition `status_code >= 400`, I isolated failed login attempts and visualized their frequency over time.  
+Although the dataset only covers a one-hour period (744 failed events), this time-based view is valuable in real-world scenarios to detect spikes in login failures.
+
+A high number of failures in a short span is often associated with brute-force password guessing, scripted reconnaissance, or malformed request testing.
+
+## 3. Investigate SSH sessions from unusual or suspicious source IP addresses
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471068751-97cec61b-0830-4f31-b21b-983fc8c07374.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1Mjc5MzcsIm5iZiI6MTc1MzUyNzYzNywicGF0aCI6Ii82NzU4Nzk4NS80NzEwNjg3NTEtOTdjZWM2MWItMDgzMC00ZjMxLWIyMWItOTgzZmM4YzA3Mzc0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDExMDAzN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTM5MWZmNWIxMmY3NTZjOTZlYzBhYmNhMGU5MjYxYzI2ZmMzNzFiZDQxMGQ0MTBhZGE5MzU0YzczMTRiM2NmMTMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.zXU0RpeS8rQAeTh6ezw5Ni0E4SUhmt0NPVP5SEzGgXo)
+
+<p align="center"><b>Figure 7:</b> Event type for 10.0.0.28</p>
+
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471068774-d7c3d06f-c51a-4661-8053-15515f705715.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1Mjc5NTAsIm5iZiI6MTc1MzUyNzY1MCwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNjg3NzQtZDdjM2QwNmYtYzUxYS00NjYxLTgwNTMtMTU1MTVmNzA1NzE1LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDExMDA1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE3ZDBjMzllZTFkNmNmNjU5MDBmMjlmMTMyNDU5Yzc3YjJkMDEwNDg4Yzk4ZGNiZTFlNmI3OTFiN2VkMzMxMTAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Oc9WCHL2L-x6qPjqDDVU0MBY8Z0iTU0L0hQ9FQHdNXU)
+
+<p align="center"><b>Figure 8:</b> Method for 10.0.0.28</p>
+
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471069143-ec5ce1c6-38c9-4187-9ca2-6b125e168dd5.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MjgxMTgsIm5iZiI6MTc1MzUyNzgxOCwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNjkxNDMtZWM1Y2UxYzYtMzhjOS00MTg3LTljYTItNmIxMjVlMTY4ZGQ1LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDExMDMzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJjNzI3YWM4MmIyYTIzNGViMjBiZmM4OWM1OGJjMjIzODkzMzM1ODA1NDgyODMxZTczM2MwNjgzMmNhZDk1NWEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.iegHbXEQXMtqBNiGWMy7DEVGPNuU5HQVou3izccybh8)
+
+<p align="center"><b>Figure 9:</b> Event type for 10.0.0.42</p>
+
+![Top Source IPs](https://private-user-images.githubusercontent.com/67587985/471069157-cc44312c-5e7b-4c49-a5e8-409df8c93291.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM1MjgxMjUsIm5iZiI6MTc1MzUyNzgyNSwicGF0aCI6Ii82NzU4Nzk4NS80NzEwNjkxNTctY2M0NDMxMmMtNWU3Yi00YzQ5LWE1ZTgtNDA5ZGY4YzkzMjkxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI2VDExMDM0NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTEwZDcxYzFhYWE3OTQxYjQwYjE4MDQxMzlkOWJjZGRjMGNlNjUwNzU3Njg4MmI0MTk5YzhiZjg5ZjU4ZDAxMTAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.E2cUZwYNfie3hOOJlDK-KVy8ie1poBg42-5p4_xykPg)
+
+<p align="center"><b>Figure 10:</b> Method for 10.0.0.42</p>
+
+## 📊 Per-IP Activity Analysis
+
+This section dives into two of the top source IP addresses based on SSH activity volume, highlighting their behavior across key fields.
+
+---
+
+### 🔸 IP: `10.0.0.28`
+
+| **Field**     | **Top Values**                                                                                   | **Insights**                                                |
+|---------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `event_type`  | Standard (37%), Client Error (21%), Server Error (13%), Suspicious Agent(9.2%),                  | Shows both normal and suspicious interactions                |
+| `method`      | POST (50%), GET (43%), PUT/DELETE (minor)                                                        | High POST = possible payload uploads or login attempts       |
+
+---
+
+### 🔸 IP: `10.0.0.42`
+
+| **Field**     | **Top Values**                                                                                   | **Insights**                                                |
+|---------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `event_type`  | Standard (41%), Client Error(19%), Suspicious Agent(10%)                                         | Server Errors and suspicious patterns suggest aggressive or invalid use |
+| `method`      | GET (52%), POST (42%), DELETE/PUT (minor)                                                        | GET-dominant = reconnaissance or probing                     |
+
+## ✅ What I Observed and Concluded
+
+I analyzed the behavior of the top two source IPs (`10.0.0.28` and `10.0.0.42`) to determine the nature of their interactions with the system.
+
+The IP `10.0.0.28` demonstrated behavior consistent with **exploitation or payload delivery attempts**, showing a high percentage of **POST** requests along with several **PUT** and **DELETE** methods. Additionally, the presence of event types like **"Suspicious Agent"** and **"Suspicious URI"** supports the hypothesis of malicious activity intended to compromise the system.
+
+In contrast, IP `10.0.0.42` exhibited a pattern dominated by **GET** requests and a notable number of **Server Error** and **Unexpected Method** responses. This aligns more with **reconnaissance or probing behavior**, possibly using automated tools to scan for exploitable paths or services.
+
+These observed patterns are valuable in real-world SOC environments to distinguish **active exploit attempts** from **reconnaissance bots**, allowing teams to **prioritize response** and improve detection strategies.
+
+## 🎯 Purpose of Investigating Top Source IPs in SSH Logs
+
+Investigating the top source IPs is a critical part of SSH log analysis, as it provides insight into how different actors interact with the system and reveals patterns that may indicate malicious behavior.
+
+By analyzing the top IPs, I aimed to understand the behavior profile of each source — whether they exhibited signs of aggressive scanning, exploitation attempts, or more passive interaction. Certain combinations of `event_type` and `method` fields help identify these patterns more clearly, especially when linked to failed login attempts or unusual method usage.
+
+This analysis also supports attacker classification. For example, repeated requests using common brute-force signatures can point to automated tools, while more targeted or varied activity may suggest more advanced or hands-on attackers.
+
+Overall, source IP analysis helps distinguish between random noise, automated recon, and deliberate exploitation, which is vital for effective threat detection and response.
+
+## 📊 4. Monitor User Behavior
+## 1. Failed Attempts by Session ID (uid)
