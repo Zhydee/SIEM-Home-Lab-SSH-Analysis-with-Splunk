@@ -360,32 +360,41 @@ I attempted to analyze session durations by calculating the time difference betw
 
 This observation suggests that the dataset logs only one key event per session, rather than tracking full session lifecycles. It's likely a limitation of the simulated dataset — which appears to be designed for basic detection and pattern recognition rather than detailed session-based analysis. As such, session duration insights were not possible in this scenario.
 
+
 ## 🧾 5. Splunk Report
 
-This report demonstrates my ability to generate reports from Splunk searches, even with synthetic data.
+This section showcases my ability to create and export reports directly from Splunk based on SSH log data analysis. These reports highlight key metrics such as request methods, status codes, and top source IPs—even when using synthetic or simulated datasets.
 
 ### 📝 Report Title: `SSH Activity Summary Report`
-- **Query used**: Method, status code, source IP, and failed login breakdown
-- **Export format**: `.pdf`
-- **Purpose**: Show capability to convert Splunk search results into shareable executive reports
+- **Export Format**: `.pdf`
+- **Purpose**: Demonstrate proficiency in transforming search results into structured, shareable executive reports using Splunk's reporting functionality.
+- **Note**: These reports focus on presenting clear metrics visually rather than providing exhaustive analysis.
 
-📌 _This report was not meant for deep analytics but as **evidence of skill** in generating and formatting Splunk reports._
+### 📄 Reports Included
+| Report Title | Description |
+|--------------|-------------|
+| [SSH_Request_Methods_Distribution-2025-07-26.pdf](SSH_Request_Methods_Distribution-2025-07-26.pdf) | Summarizes the frequency of different HTTP/SSH methods (GET, POST, PUT, DELETE, etc.) used in the log data. |
+| [HTTP_Status_Code_Breakdown_in_SSH_Logs-2025-07-26.pdf](HTTP_Status_Code_Breakdown_in_SSH_Logs-2025-07-26.pdf) | Displays the count and distribution of HTTP status codes (e.g., 200, 404, 503), useful for spotting failed or malicious interactions. |
+| [SSH_Top_Source_IPs-2025-07-26.pdf](SSH_Top_Source_IPs-2025-07-26.pdf) | Lists the most frequent IP addresses initiating SSH sessions or requests, helping to identify potential attackers or scanning sources. |
 
----
+📌 _These reports serve as evidence of my technical skill in creating and formatting Splunk reports, suitable for team briefings, stakeholder updates, or audits._
+
 
 ## 🧩 6. Splunk Dashboard
 
 ### 🎯 Dashboard Title: `SSH Log Behavior Overview`
 
 **Panels included**:
-- **Top 10 Source IPs**: Horizontal bar chart showing top IPs by activity
-- **HTTP Status Code Breakdown**: Pie chart showing 200, 404, 400, 500, etc.
-- **Request Method Distribution**: Pie chart showing GET, POST, PUT, DELETE
+- **Top 10 Source IPs**: Horizontal bar chart showing top IPs by activity  
+- **HTTP Status Code Breakdown**: Pie chart showing 200, 404, 400, 500, etc.  
+- **Request Method Distribution**: Pie chart showing GET, POST, PUT, DELETE  
 
-🔍 **Description**:
+🔍 **Description**:  
 > This dashboard provides a visual overview of SSH log behavior, including the most active source IPs (potential attackers), the types of HTTP request methods observed, and the distribution of HTTP response status codes. It helps analysts quickly identify unusual patterns in SSH traffic.
 
----
+📄 **Dashboard PDF**:  
+- [ssh_log_behavior_overview-2025-07-26.pdf](ssh_log_behavior_overview-2025-07-26.pdf)
+
 
 ## 🧠 Conclusion
 
@@ -398,4 +407,8 @@ This project demonstrated key Splunk skills:
 
 Although the dataset was simulated and constrained in time range, the analysis techniques are valid for real-world monitoring and SIEM deployments.
 
----
+💡 **From this home lab, I was able to:**
+- Understand what to analyze from an SSH log  
+- Learn what patterns or data points indicate attacker behavior  
+- Practice extracting meaningful information from SSH logs using Splunk’s search and visualization features
+
