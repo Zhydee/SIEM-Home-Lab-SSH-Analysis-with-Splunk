@@ -3,6 +3,8 @@
 This project demonstrates how Splunk can be used to ingest and analyze SSH log files for detecting suspicious activity, failed logins, command patterns, and session behavior. The dataset was obtained from an open-source repository and represents simulated SSH interaction logs.
 
 ---
+## Introduction
+SSH (Secure Shell) log files contain valuable information about remote access to servers, including login attempts, commands executed, and session details. Analyzing SSH logs using Splunk SIEM enables security professionals to monitor access to critical systems, detect anomalies, and identify potential security threats.
 
 ## 📁 Data Source
 
